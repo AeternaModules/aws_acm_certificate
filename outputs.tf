@@ -44,7 +44,7 @@ output "acm_certificates_not_before" {
 }
 output "acm_certificates_options" {
   description = "Map of options values across all acm_certificates, keyed the same as var.acm_certificates"
-  value       = { for k, v in aws_acm_certificate.acm_certificates : k => v.options if v.options != null && length(v.options) > 0 }
+  value       = { for k, v in aws_acm_certificate.acm_certificates : k => one(v.options) if v.options != null && length(v.options) > 0 }
 }
 output "acm_certificates_pending_renewal" {
   description = "Map of pending_renewal values across all acm_certificates, keyed the same as var.acm_certificates"
